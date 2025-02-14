@@ -1,5 +1,4 @@
 <?php
-// CivicPlusAPI.php - API Client Class
 require_once 'config.php';
 
 class CivicPlusAPI {

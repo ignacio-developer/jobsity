@@ -15,8 +15,6 @@ class EventController {
 
     public function viewEventDetails($eventId) {
         $event = $this->eventModel->getEventById($eventId);
-        //print_r($event);
-        //return;
         require '../app/Views/event_details.php'; // Load event details view
     }
 
