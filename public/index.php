@@ -1,5 +1,4 @@
 <?php
-
 require_once '../app/Controllers/EventController.php';
 
 $controller = new EventController();

@@ -1,18 +1,12 @@
 <?php
-
-// config.php - Configuration file for API settings
-define('CLIENT_ID', '906f1e8f-61b3-4c67-89df-b992950d59bc');
-define('CLIENT_SECRET', '3ewzvs00d6k8kspfnbkawmjqxb07mrbxicpbfdcbj5ix');
-define('API_BASE', 'https://interview.civicplus.com/906f1e8f-61b3-4c67-89df-b992950d59bc/api');
-
 // CivicPlusAPI.php - API Client Class
-//require_once 'config.php';
+require_once 'config.php';
 
 class CivicPlusAPI {
     private $token;
 
     public function __construct() {
-        $this->authenticate();
+        $this->loadToken();
     }
 
     private function authenticate() {
@@ -24,15 +18,20 @@ class CivicPlusAPI {
         
         $response = $this->makeRequest($url, 'POST', $data, false);
         if ($response && isset($response->access_token)) {
-            //print_r($response);
             $this->token = $response->access_token;
+            $_SESSION['api_token'] = $this->token;
+            $_SESSION['token_expires'] = time() + 2592000; // Token valid for 30 days
         } else {
             die('Authentication failed.');
         }
     }
 
-    public function getToken() {
-        return $this->token;
+    private function loadToken() {
+        if (!empty($_SESSION['api_token']) && !empty($_SESSION['token_expires']) && time() < $_SESSION['token_expires']) {
+            $this->token = $_SESSION['api_token'];
+        } else {
+            $this->authenticate();
+        }
     }
 
     protected function makeRequest($url, $method = 'GET', $data = [], $auth = true) {
