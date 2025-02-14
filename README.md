@@ -25,13 +25,15 @@
 - Use of coding standards for a more readable code.
 - Use of Git for version control.
 
-
 ### To Do ideas.
 - Edit event page.
 - Remove event button.
 - Sort events by specific field (e.g.: start/end date, title, etc.).
-  
 
 ## Setting Everything Up
-As mentioned above we have chosen to make use of legacy pure PHP as the foundation of this technical test. 
--
+- As mentioned above we have chosen to make use of legacy pure PHP as the foundation of this technical test. So I tried to keep it pretty simple, straight to the point:
+- Note: You should have PHP installed globally in your computer (check your php version in the terminal by running "php --version" command)
+1. Clone this repository using the terminal command: git clone https://github.com/ignacio-developer/jobsity.git
+2. In the terminal navigate to the project directory: /jobsity/public
+3. Once inside that folder, Run the command "php -S localhost:8000"
+4. Access in the browser http://localhost:8000
