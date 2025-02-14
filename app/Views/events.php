@@ -38,8 +38,6 @@
                             <div class="card-body">
                                 <h5 class="card-title"><?= htmlspecialchars($event->title) ?></h5>
                                 <p class="card-text text-muted"><?= htmlspecialchars($event->description) ?></p>
-                                <p class="card-text"><strong>🗓 Start:</strong> <?= $start->format('D, M j, Y H:i') ?></p>
-                                <p class="card-text"><strong>🚀 End:</strong> <?= $end->format('D, M j, Y H:i') ?></p>
                                 <a href="index.php?action=viewEvent&id=<?= $event->id ?>" class="btn btn-primary">📌 View Details</a>
                             </div>
                         </div>
