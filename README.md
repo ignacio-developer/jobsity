@@ -10,6 +10,7 @@
 - Abstaction: Config.php file for API credentials (Base API Url, ClientId and ClientSecret key).
 - API Auth via Token using the provided credentials.
 - cURL library implementation for handle request and responses in PHP.
+- Session Variables ($_SESSION) to avoid the creation of several tokens.
 
 ### Requirements
 - As a User, you can see the list of all events.
