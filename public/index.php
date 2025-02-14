@@ -9,6 +9,8 @@ $action = $_GET['action'] ?? 'listEvents';
 
 if ($action === 'viewEvent' && isset($_GET['id'])) {
     $controller->viewEventDetails($_GET['id']);
-} else {
+} elseif ($action === 'addEvent') {
+    $controller->addEvent();
+}  else {
     $controller->listEvents();
 }

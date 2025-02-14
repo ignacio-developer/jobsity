@@ -18,6 +18,7 @@ class Event extends CivicPlusAPI {
             'startDate' => $startDate,
             'endDate' => $endDate
         ];
-        return $this->makeRequest(API_BASE . "/Events", 'POST', $data);
+        $response = $this->makeRequest(API_BASE . "/Events", 'POST', $data);
+        return isset($response->id);
     }
 }

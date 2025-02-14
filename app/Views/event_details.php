@@ -19,7 +19,13 @@ $statusClass = ($status === "Upcoming") ? "info" : (($status === "Ongoing") ? "w
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-4">
+    <header class="bg-light py-3 mb-4 shadow-sm">
+        <div class="container d-flex align-items-center">
+            <img src="civicplus-logo.jpg" alt="CivicPlus Logo" height="50" class="me-3">
+            <h2 class="mb-0">Ignacio Giampaoli - Coding Challenge</h2>
+        </div>
+    </header>
+    <div class="container mt-5">
         <a href="index.php" class="btn btn-secondary mb-3">⬅ Back to Events</a>
         <div class="card shadow-sm">
             <div class="card-header bg-<?= $statusClass ?> text-white">
