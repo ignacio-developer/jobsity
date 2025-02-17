@@ -1,7 +1,6 @@
 <?php
-//require_once 'config.php';
-require_once '../app/helpers.php'; // Load helper function
-loadEnv(); // Load environment variables
+require_once '../app/helpers.php'; // Load helper function for environment vars.
+loadEnv(); // Load environment variables.
 
 class CivicPlusAPI {
     private $token;
@@ -36,26 +35,45 @@ class CivicPlusAPI {
     }
 
     protected function makeRequest($url, $method = 'GET', $data = [], $auth = true) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        
-        $headers = ['Content-Type: application/json'];
-        if ($auth && $this->token) {
-            $headers[] = 'Authorization: Bearer ' . $this->token;
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FAILONERROR, true);
+            
+            $headers = ['Content-Type: application/json'];
+            if ($auth && $this->token) {
+                $headers[] = 'Authorization: Bearer ' . $this->token;
+            }
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+            if ($method === 'POST') {
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            }
+    
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $curlError = curl_error($ch);
+            curl_close($ch);
+    
+            if ($curlError) {
+                throw new Exception("cURL error: " . $curlError);
+            }
+    
+            if ($httpCode >= 400) {
+                throw new Exception("API request failed with status code $httpCode: " . json_encode($response));
+                /* e.g: 
+                 * 1. invalid auth token will respond: Please check your that Authorization was provided. 
+                 * TheHTTP status code of the response was not expected (401). 
+                 * 2. invalid end-point will respond: Endpoint not found (404). 
+                */
+            }
+    
+            return json_decode($response);
+        } catch (Exception $e) {
+            error_log("API Request Error: " . $e->getMessage());
+            return null; // Return null or handle errors accordingly
         }
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        if ($method === 'POST') {
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        }
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        //print_r($response);
-
-        return json_decode($response);
     }
 }
