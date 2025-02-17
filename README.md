@@ -7,7 +7,7 @@
 - Object Oriented Programming conceps. Use of classes, objects instanciation, inheritance, private and public properties and methods.
 - MVC architecture: routing entry point to trigger Controllers-Methods. Communication with the API through models representing the entities. View rendering with retrieved data.
 - The detail screen can be reached via a “View details” link present along side every event on the list page.
-- Abstaction: Config.php file for API credentials (Base API Url, ClientId and ClientSecret key).
+- Abstaction: .env and .env.example files to store API credentials (Base API Url, ClientId and ClientSecret key).
 - API Auth via Token using the provided credentials.
 - cURL library implementation for handle request and responses in PHP.
 - Session Variables ($_SESSION) to avoid the creation of several tokens.
