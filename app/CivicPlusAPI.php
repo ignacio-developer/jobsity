@@ -1,5 +1,7 @@
 <?php
-require_once 'config.php';
+//require_once 'config.php';
+require_once '../app/helpers.php'; // Load helper function
+loadEnv(); // Load environment variables
 
 class CivicPlusAPI {
     private $token;
@@ -9,10 +11,10 @@ class CivicPlusAPI {
     }
 
     private function authenticate() {
-        $url = API_BASE . "/Auth";
+        $url = $_ENV['API_BASE'] . "/Auth";
         $data = [
-            'clientId' => CLIENT_ID,
-            'clientSecret' => CLIENT_SECRET
+            'clientId' => $_ENV['CLIENT_ID'],
+            'clientSecret' => $_ENV['CLIENT_SECRET']
         ];
         
         $response = $this->makeRequest($url, 'POST', $data, false);
