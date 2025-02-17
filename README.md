@@ -20,7 +20,7 @@
 
 ### Bonus
 - Use of Bootstrap for UI/UX.
-- Form validation (mandatory fields, Start Date can't be later than End Date).
+- Form validation FRONT AND BACK (mandatory fields, Start Date can't be later than End Date).
 - Model-View-Controller architecture (no framework).
 - Use of coding standards for a more readable code.
 - Use of Git for version control.
